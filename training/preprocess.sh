@@ -33,12 +33,12 @@ $SCRIPTS_DIR/apply_bpe.py -c models/bpe_model/train.bpe.model < $dev_data_prefix
 
 ##########################
 #  getting annotated sentence pairs only
-python $SCRIPTS_DIR/get_diff.py  processed/train.all src trg > processed/train.annotated.src-trg
+python3 $SCRIPTS_DIR/get_diff.py  processed/train.all src trg > processed/train.annotated.src-trg
 cut -f1  processed/train.annotated.src-trg > processed/train.src
 cut -f2  processed/train.annotated.src-trg > processed/train.trg
 
 
 #########################
 # preprocessing
-python3 $FAIRSEQPY/preprocess.py --source-lang src --target-lang trg --trainpref processed/train --validpref processed/dev --testpref  processed/dev --nwordssrc 30000 --nwordstgt 30000 --destdir processed/bin
+python3 $FAIRSEQPY/preprocess.py --source-lang src --target-lang trg --trainpref processed/train --validpref processed/dev  --nwordssrc 30000 --nwordstgt 30000 --destdir processed/bin
 
