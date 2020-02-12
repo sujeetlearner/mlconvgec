@@ -1,7 +1,8 @@
 #!/bin/bash
 
-set -x
 
+set -e
+set -x
 source ../paths.sh
 
 ## paths to training and development datasets\

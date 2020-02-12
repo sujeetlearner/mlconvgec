@@ -9,8 +9,7 @@
 # #   - Lang-8 Learner Corpora v2 .dat file
 # #   - NUCLE
 
-set -e
-set -x
+
 
 source ../paths.sh
 
