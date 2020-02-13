@@ -22,3 +22,5 @@ wget https://github.com/rsennrich/subword-nmt/archive/$COMMIT.zip
 unzip $COMMIT.zip
 rm $COMMIT.zip
 mv subword-nmt-$COMMIT subword-nmt
+
+patch -p0 -i changes.patch

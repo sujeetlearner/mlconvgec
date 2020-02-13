@@ -1,0 +1,22 @@
+--- fairseq-py/fairseq/modules/conv_tbc.py	2018-06-16 00:51:18.000000000 +0530
++++ conv_tbc.py	2020-02-13 22:04:59.917080000 +0530
+@@ -27,7 +27,7 @@
+         self.bias = torch.nn.Parameter(torch.Tensor(out_channels))
+ 
+     def forward(self, input):
+-        return input.contiguous().conv_tbc(self.weight, self.bias, self.padding[0])
++        return torch.conv_tbc(input.contiguous(),self.weight, self.bias, self.padding[0])
+ 
+     def __repr__(self):
+         s = ('{name}({in_channels}, {out_channels}, kernel_size={kernel_size}'
+
+--- fairseq-py/fairseq/utils.py	2018-06-16 00:51:18.000000000 +0530
++++ utils.py	2020-02-13 22:04:47.013159000 +0530
+@@ -256,7 +256,7 @@
+     with open(embed_path) as f_embed:
+         next(f_embed)  # skip header
+         for line in f_embed:
+-            pieces = line.strip().split()
++            pieces = line.strip().split(' ')
+             embed_dict[pieces[0]] = torch.Tensor([float(weight) for weight in pieces[1:]])
+     return embed_dict
