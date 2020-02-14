@@ -29,7 +29,7 @@ $SCRIPTS_DIR/apply_bpe.py -c models/bpe_model/train.bpe.model < $train_data_pref
 $SCRIPTS_DIR/apply_bpe.py -c models/bpe_model/train.bpe.model < $dev_data_prefix.tok.src > processed/dev.src
 $SCRIPTS_DIR/apply_bpe.py -c models/bpe_model/train.bpe.model < $dev_data_prefix.tok.trg > processed/dev.trg
 #cp $dev_data_m2 processed/dev.m2
-#cp $dev_data_prefix.all.tok.src processed/dev.input.txt
+cp $dev_data_prefix.tok.src processed/dev.input.txt
 
 ##########################
 #  getting annotated sentence pairs only
