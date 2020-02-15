@@ -20,3 +20,15 @@
 +            pieces = line.strip().split(' ')
              embed_dict[pieces[0]] = torch.Tensor([float(weight) for weight in pieces[1:]])
      return embed_dict
+
+--- nbest-reranker/features.py	2020-02-15 14:28:59.309199172 +0530
++++ features.py	2020-02-14 22:42:34.478261000 +0530
+@@ -15,7 +15,7 @@
+ 
+ # For KenLM features
+ sys.path.insert(0, 'lib/kenlm_python/')
+-import kenlm
++from lib import kenlm_python as kenlm
+ 
+ 
+ # For edit operations feature
