@@ -5,12 +5,12 @@ set -x
 
 source ../paths.sh
 
-if [ $# -ge 5 ]; then
+if [ $# -ge 4 ]; then
     output_dir=$1
     device=$2
     model_path=$3
-    reranker_feats=$4
-    moses_path=$5
+    #reranker_feats=$4
+    moses_path=$4
 else
     echo "Please specify the paths to the input_file and output rerdirectory"
     echo "Usage: `basename $0` <output_dir> <gpu-device-num(e.g: 0)> <path to model_file/dir> <features, e.g 'eo' or 'eolm'> <path-to-moses>"   >&2
@@ -59,9 +59,9 @@ elif [ $reranker_feats == "eolm" ]; then
 fi
 
 
-python2.7 $SCRIPTS_DIR/apply_bpe.py -c models/bpe_model/train.bpe.model < processed/dev.input.txt > $output_dir/dev.input.bpe.txt
+#python2.7 $SCRIPTS_DIR/apply_bpe.py -c models/bpe_model/train.bpe.model < processed/dev.input.txt > $output_dir/dev.input.bpe.txt
 
-CUDA_VISIBLE_DEVICES=$device python3.6 $FAIRSEQPY/interactive.py --no-progress-bar --path $models --beam $beam --nbest $beam --source-lang src --target-lang trg  processed/bin  < $output_dir/dev.input.bpe.txt > $output_dir/dev.output.bpe.nbest.txt
+#CUDA_VISIBLE_DEVICES=$device python3 $FAIRSEQPY/interactive.py --path $models --beam $beam --nbest $beam --source-lang src --target-lang trg  processed/bin  < $output_dir/dev.input.bpe.txt > $output_dir/dev.output.bpe.nbest.txt
 
 # reformating the nbest file
 python2.7 $SCRIPTS_DIR/nbest_reformat.py -i $output_dir/dev.output.bpe.nbest.txt --debpe > $output_dir/dev.output.tok.nbest.reformat.txt
