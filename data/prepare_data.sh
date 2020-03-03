@@ -31,7 +31,7 @@ HIWIKI_SCRIPTS=$DATA_DIR/scripts/hiwiki_scripts
 #REPLACE_UNICODE=$MOSES_SCRIPTS/replace-unicode-punctuation.perl
 REMOVE_NON_PRINT=$MOSES_SCRIPTS/remove-non-printing-char.perl
 NORMALIZE_PUNCT=$MOSES_SCRIPTS/normalize-punctuation.perl
-TOKENIZER="$NLTK_SCRIPTS/word-tokenize.py"
+TOKENIZER="python3 $NLTK_SCRIPTS/word-tokenize.py"
 mkdir -p $DATA_DIR/tmp
 
 # NUCLE
@@ -92,12 +92,14 @@ done
 #$MOSES_SCRIPTS/clean-corpus-n.perl $hiwiki.tok src trg $DATA_DIR/train.clean.tok 1 80
 
 
-ln -s $hiwiki.tok.src train.tok.src
-ln -s $hiwiki.tok.trg train.tok.trg
+#ln -s $hiwiki.tok.src train.tok.src
+#ln -s $hiwiki.tok.trg train.tok.trg
 # ln -s nucle-dev/nucle-dev.non_empty.tok.src dev.tok.src
 # ln -s nucle-dev/nucle-dev.non_empty.tok.trg dev.tok.trg
 # ln -s nucle-dev/nucle-dev.tok.src dev.all.tok.src
 # ln -s nucle-dev/nucle-dev.m2 dev.all.m2
+tail -184744 $hiwiki.tok.src > train.tok.src
+tail -184744 $hiwiki.tok.trg > train.tok.trg
 
-head -$DEV_LINES train.tok.src > dev.tok.src
-head -$DEV_LINES train.tok.trg > dev.tok.trg  
+head -$DEV_LINES $hiwiki.tok.src > dev.tok.src
+head -$DEV_LINES $hiwiki.tok.trg > dev.tok.trg  
