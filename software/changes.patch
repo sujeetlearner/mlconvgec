@@ -32,3 +32,16 @@
  
  
  # For edit operations feature
+
+--- fairseq-py/train.py    2018-06-15 12:21:18.000000000 +0530
++++ train.py   2020-07-11 11:55:17.633153381 +0530
+@@ -5,7 +5,8 @@
+ # This source code is licensed under the license found in the LICENSE file in
+ # the root directory of this source tree. An additional grant of patent rights
+ # can be found in the PATENTS file in the same directory.
+-
++import os
++os.symlink=lambda *args,**kwargs:0
+ import collections
+ import itertools
+ import os
